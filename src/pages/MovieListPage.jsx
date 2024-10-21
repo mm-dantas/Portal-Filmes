@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+    import { useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
 
 export default function MovieListPage() {
