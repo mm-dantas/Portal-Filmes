@@ -1,4 +1,4 @@
-    import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
 
 export default function MovieListPage() {
@@ -16,14 +16,14 @@ export default function MovieListPage() {
         setIsLoading(true)
         setTimeout(() => {
             fetch(`https://api.themoviedb.org/3/movie/popular?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-br`)
-            .then(response => response.json())
-            .then(data => {
-                setFilmes(data.results)
-            })
-            .catch(error => console.error(error))
-            .finally(() => setIsLoading(false));
-        }, 5000)
-        
+                .then(response => response.json())
+                .then(data => {
+                    setFilmes(data.results)
+                })
+                .catch(error => console.error(error))
+                .finally(() => setIsLoading(false));
+        }, 2000)
+
     }, []);
 
 
@@ -42,21 +42,21 @@ export default function MovieListPage() {
                 value={search}
                 onChange={handleSearch}
             />
-            <section className="flex">
+            <section className="flex flex-wrap justify-between gap-4">
                 {
                     isLoading ? <p>Carregando</p>
-                    :
-                    filmesFiltrados.length > 0 ?
-
-                        filmesFiltrados
-                            .map(filme => (
-                                <MovieCard key={filme.id} {...filme} />
-                            ))
                         :
-                        <p> Filme não encontrado</p>
+                        filmesFiltrados.length > 0 ?
 
-                    
-                    
+                            filmesFiltrados
+                                .map(filme => (
+                                    <MovieCard key={filme.id} {...filme} />
+                                ))
+                            :
+                            <p> Filme não encontrado</p>
+
+
+
                 }
             </section>
         </>
