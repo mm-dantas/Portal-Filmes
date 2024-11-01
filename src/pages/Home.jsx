@@ -1,44 +1,42 @@
-import { useContext, useEffect, useState } from "react";
-import CardContainer from "../components/CardContainer";
+import { useEffect, useState } from "react";
 import ContainerMovies from "../components/ContainerMovies";
 import ContainerRecomendados from "../components/ContainerRecomendados";
 import MovieCard from "../components/MovieCard";
-import movies from "../data/movies.json";
 
 export default function Home() {
     
     const [filmesPopulares, setFilmesPopulares] = useState([]);
     const [filmesEstaoPorVir, setFilmesEstaoPorVir] = useState([]);
-    const [seriesTV, setSeriesTV] = useState([]);
+    const [filmesTendencia, setFilmesTendencia] = useState([]);
 
 
-    const chave_api = '?api_key=7c572a9f5b3ba776080330d23bb76e1e';  
+    const chave_api = '?api_key=7c572a9f5b3ba776080330d23bb76e1e';
     const inicio_url = 'https://api.themoviedb.org/3';
 
     const fetchMovies = async () => {
-        try{
-            const popularidadeURL = `${inicio_url}/movie/popular${chave_api}&language=pt-br&page=1`;
+        try {
+            const popularidadeURL = `${inicio_url}/movie/popular?api_key=${import.meta.env.VITE_API_KEY}&language=pt-br&page=1`;
             const estaoPorVirURL = `${inicio_url}/movie/upcoming${chave_api}&language=pt-br&page=1`;
-            const seriesTvURL = `${inicio_url}/tv/popular${chave_api}&language=pt-br&page=1`;
+            const tendenciasURL = `${inicio_url}/trending/all/week${chave_api}&language=pt-br&page=1`;
 
-            const [popularResponse, estaoPorVirResponse, seriesTvResponse] = await Promise.all([
+            const [popularResponse, estaoPorVirResponse, tendenciasResponse] = await Promise.all([
                 fetch(popularidadeURL),
                 fetch(estaoPorVirURL),
-                fetch(seriesTvURL)
-              ]);
+                fetch(tendenciasURL)
+            ]);
 
             const popularData = await popularResponse.json();
             const estaoPorVirData = await estaoPorVirResponse.json();
-            const seriesTvURLData = await seriesTvResponse.json();
-            
+            const tendenciasData = await tendenciasResponse.json();
+
             setFilmesPopulares(popularData.results);
             setFilmesEstaoPorVir(estaoPorVirData.results);
-            setSeriesTV(seriesTvURLData.results);
+            setFilmesTendencia(tendenciasData.results);
         }
-        catch(error){
+        catch (error) {
             console.error('Erro ao buscar os filmes:', error);
         }
-        
+
     }
 
     useEffect(() => {
@@ -48,7 +46,7 @@ export default function Home() {
     return (
         <>
             <ContainerRecomendados titulo="Recomendados">
-                
+
             </ContainerRecomendados>
 
             {/* <CardContainer titulo="Filmes antigos">
@@ -62,36 +60,36 @@ export default function Home() {
             </CardContainer> */}
 
             <ContainerMovies titulo="Filmes Populares">
-            {
-                filmesPopulares
-                .map( movie => (
-                    <MovieCard
-                        key={movie.id} {...movie} />
-                    )
-                )
-            }
+                {
+                    filmesPopulares
+                        .map(movie => (
+                            <MovieCard
+                                key={movie.id} {...movie} />
+                        )
+                        )
+                }
             </ContainerMovies>
 
             <ContainerMovies titulo="Chegando Nos Cinemas">
-            {
-                filmesEstaoPorVir
-                .map( movie => (
-                    <MovieCard
-                        key={movie.id} {...movie} />
-                    )
-                )
-            }
+                {
+                    filmesEstaoPorVir
+                        .map(movie => (
+                            <MovieCard
+                                key={movie.id} {...movie} />
+                        )
+                        )
+                }
             </ContainerMovies>
 
-            <ContainerMovies titulo="Séries de TV">
-            {
-                seriesTV
-                .map( movie => (
-                    <MovieCard
-                        key={movie.id} {...movie} />
-                    )
-                )
-            }
+            <ContainerMovies titulo="Tendências">
+                {
+                    filmesTendencia
+                        .map(movie => (
+                            <MovieCard
+                                key={movie.id} {...movie} />
+                        )
+                        )
+                }
             </ContainerMovies>
 
 

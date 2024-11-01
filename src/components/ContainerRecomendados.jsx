@@ -16,7 +16,7 @@ export default function ContainerRecomendados({titulo}) {
                 const next = (prevSelected % radioButtons.length) + 1;
                 return next;
             });
-        }, 5000); // Muda a cada 5 segundos
+        }, 3000); // Muda a cada 3 segundos
 
         return () => clearInterval(interval); // Limpa o intervalo quando o componente é desmontado
     }, []);
