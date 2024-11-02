@@ -64,7 +64,7 @@ export default function Home() {
                     filmesPopulares
                         .map(movie => (
                             <MovieCard
-                                key={movie.id} {...movie} />
+                                key={movie.id} {...movie} isFavorite={true}/>
                         )
                         )
                 }

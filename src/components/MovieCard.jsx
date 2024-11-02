@@ -1,29 +1,42 @@
 import { Link } from "react-router-dom";
+import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 
-export default function MovieCard({ id, title, poster_path, backdrop_path}) {
-    
+
+export default function MovieCard({ id, title, poster_path, backdrop_path, isFavorite }) {
+
     const handleFavorite = (movie) => {
         let favoritos = JSON.parse(localStorage.getItem('favoritos')) || []
 
-        const isFavorito = favoritos.some( filme => filme.id === movie.id )
+        const isFavorito = favoritos.some(filme => filme.id === movie.id)
 
-        if(isFavorito){
-            favoritos = favoritos.filter( filme => filme.id != movie.id)
-        }else{
+        if (isFavorito) {
+            favoritos = favoritos.filter(filme => filme.id != movie.id)
+        } else {
             favoritos.push(movie)
         }
 
         localStorage.setItem('favoritos', JSON.stringify(favoritos))
     }
-    
+
     return (
         <div key={id} className="flex flex-col text-center justify-center items-center flex-shrink-0 relative">
             {/* <h2>{title}</h2> */}
-            <img src={`https://image.tmdb.org/t/p/w342${poster_path}`} alt={title} className="w-[130px] h-[200px] mt-3"/>
-            <button 
-            onClick={() => handleFavorite({id, title, poster_path})}>
-                Adicionar Favoritos</button>
-            <Link className="py-2 px-3 transition ease-in-out duration-300 bg-purple-800 hover:bg-white hover:text-purple-800 m-4 text-white rounded-3xl" to={`/movies/${id}`}>Saber mais</Link>
+            <img src={`https://image.tmdb.org/t/p/w342${poster_path}`} alt={title} className="rounded-t-lg w-[130px] h-[200px]" />
+            <div className="p-2 rounded-b-lg bg-gray-500 w-full grid grid-cols-2 gap-4 items-center justify-items-center">                
+                    <button className="transition ease-in-out duration-300 transform hover:scale-125"
+                        onClick={() => handleFavorite({ id, title, poster_path })}>
+                        {isFavorite ?
+                            <MdFavorite className="text-red-500 transition-transform duration-300 ease-in-out transform scale-125" /> :
+                            <MdFavoriteBorder className="text-light transition-transform duration-300 ease-in-out transform scale-125" />}
+                    </button>
+                
+                    <Link className="transform transition-transform duration-300 hover:scale-125" to={`/movies/${id}`}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                        </svg>
+                    </Link>
+                
+            </div>
         </div>
     )
 }
