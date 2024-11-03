@@ -45,6 +45,7 @@ export default function Home() {
 
     return (
         <>
+        <div className="bg-gray-900 text-white min-h-screen px-4 py-6">
             <ContainerRecomendados titulo="Recomendados">
 
             </ContainerRecomendados>
@@ -91,7 +92,7 @@ export default function Home() {
                         )
                 }
             </ContainerMovies>
-
+            </div>
 
         </>
     )
