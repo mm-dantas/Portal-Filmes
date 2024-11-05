@@ -14,12 +14,12 @@ export function CircularPagination({totalPages, currentPage, onPageChange}) {
  
 const next = () => {
     if (currentPage === 10) return;
-    onPageChange(currentPage + 1); 
+    onPageChange(currentPage + 1); // Próxima página
   };
 
   const prev = () => {
     if (currentPage === 1) return;
-    onPageChange(currentPage - 1);
+    onPageChange(currentPage - 1); // Página anterior
   };
  
   return (

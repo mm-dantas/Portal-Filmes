@@ -29,7 +29,7 @@ export default function MovieListPage() {
 
     const filmesFiltrados = filmes
         .filter(filme => filme.title.toLowerCase().includes(search.toLowerCase()))
-        .slice(0, 20); // Limita a exibição para 20 filmes por página
+        .slice(0, 20);
 
     return (
         <div className="bg-gray-900 text-white min-h-screen px-4 py-6">
