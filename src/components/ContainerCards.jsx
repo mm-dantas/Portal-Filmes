@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-export default function ContainerMovies({titulo, children}){
+export default function ContainerCards({titulo, children}){
 
     const carouselRef = useRef(null);
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ContainerMovies from "../components/ContainerMovies";
+import ContainerCards from "../components/ContainerCards";
 import ContainerRecomendados from "../components/ContainerRecomendados";
 import MovieCard from "../components/MovieCard";
 
@@ -60,7 +60,7 @@ export default function Home() {
                 }
             </CardContainer> */}
 
-            <ContainerMovies titulo="Filmes Populares">
+            <ContainerCards titulo="Filmes Populares">
                 {
                     filmesPopulares
                         .map(movie => (
@@ -69,9 +69,9 @@ export default function Home() {
                         )
                         )
                 }
-            </ContainerMovies>
+            </ContainerCards>
 
-            <ContainerMovies titulo="Chegando Nos Cinemas">
+            <ContainerCards titulo="Chegando Nos Cinemas">
                 {
                     filmesEstaoPorVir
                         .map(movie => (
@@ -80,9 +80,9 @@ export default function Home() {
                         )
                         )
                 }
-            </ContainerMovies>
+            </ContainerCards>
 
-            <ContainerMovies titulo="Tendências">
+            <ContainerCards titulo="Tendências">
                 {
                     filmesTendencia
                         .map(movie => (
@@ -91,7 +91,7 @@ export default function Home() {
                         )
                         )
                 }
-            </ContainerMovies>
+            </ContainerCards>
             </div>
 
         </>

@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ContainerCards from "../components/ContainerCards";
+import ElencoCard from "../components/ElencoCard";
+import ImgSalvar from "../../public/salvar.png";
+import ImgeRemoverSalvar from "../../public/removerSalvar.png";
+import ImgAssistido from "../../public/assistido.png";
+import ImgNaoAssistido from "../../public/naoAssistido.png";
 
 export default function MovieDetailPage() {
     const { id } = useParams();
     const [filme, setFilme] = useState({});
     const [trailer, setTrailer] = useState(null);
     const [watchLater, setWatchLater] = useState(false);
+    const [assistido, setAssistido] = useState(false);
 
     //elenco
     const [elenco, setElenco] = useState([]);
@@ -23,7 +30,7 @@ export default function MovieDetailPage() {
         setElenco(elencoData.cast);
     }
     catch (error) {
-        console.error('Erro ao buscar os filmes:', error);
+        console.error('Erro ao buscar os elenco:', error);
     }
 
 }
@@ -33,6 +40,7 @@ useEffect(() => {
 }, []);
     
     //fim elesnco
+
 
     useEffect(() => {
         fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-br`)
@@ -71,6 +79,21 @@ useEffect(() => {
         setWatchLater(!isWatchLater);
     };
 
+    const handleAssistido = (filme) => {
+        let jaVisto = JSON.parse(localStorage.getItem('JaAssistidos')) || [];
+
+        const isAssistido = jaVisto.some(item => item.id === filme.id);
+
+        if (isAssistido) {
+            jaVisto = jaVisto.filter(item => item.id !== filme.id);
+        } else {
+            jaVisto.push(filme);
+        }
+
+        localStorage.setItem('JaAssistidos', JSON.stringify(jaVisto));
+        setAssistido(!isAssistido);
+    };
+
     return (
         <>
             <div
@@ -101,29 +124,43 @@ useEffect(() => {
                             </div>
                         </div>
                         <p className="text-xl font-semibold max-w-xl">{filme.overview}</p>
+                        <div className="flex gap-5">
                         <button 
                             onClick={() => handleWatchLater({ id: filme.id, title: filme.title, poster_path: filme.poster_path })} 
-                            className={`mt-4 w-16 h-16 rounded-full ${watchLater ? 'bg-red-600' : 'bg-green-600'} text-white flex items-center justify-center`}
+                            className={`mt-4 w-16 h-16 rounded-full bg-white text-white flex items-center justify-center`}
                         >
                             {watchLater ? (
-                                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                                </svg>
+                                <img src={ImgeRemoverSalvar} alt="Ícone de remover dos salvos" className="h-10"/>
+
                             ) : (
-                                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                </svg>
+                                <img src={ImgSalvar} alt="Ícone de salvar" className="h-10"/>
+                                
                             )}
                         </button>
+                        
+                        <button 
+                            onClick={() => handleAssistido({ id: filme.id, title: filme.title, poster_path: filme.poster_path })} 
+                            className={`mt-4 w-16 h-16 rounded-full bg-white text-white flex items-center justify-center`}
+                        >
+                            {assistido ? (
+                                <img src={ImgAssistido} alt="Ícone de remover dos assistido" className="h-10"/>
+
+                            ) : (
+                                <img src={ImgNaoAssistido} alt="Ícone adicionar aos assistidos" className="h-10"/>
+                                
+                            )}
+                        </button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div>
+            <div className="flex flex-col mt-12 justify-center items-center">
+            <h1 className="text-3xl font-bold mb-5">TRAILER</h1>
                 {trailer ? (
                     <iframe
-                        width="560"
-                        height="315"
+                        width="1120"
+                        height="630"
                         src={trailer.replace("watch?v=", "embed/")}
                         title={`${filme.title} Trailer`}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -133,6 +170,17 @@ useEffect(() => {
                     <p>Trailer não disponível</p>
                 )}
             </div>
+
+            <ContainerCards titulo="Elenco">
+                {
+                    elenco
+                        .map(pessoa => (
+                            <ElencoCard
+                                key={pessoa.id} {...pessoa}/>
+                        )
+                        )
+                }
+            </ContainerCards>
 
             
         </>

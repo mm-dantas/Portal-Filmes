@@ -4,6 +4,7 @@ import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 
 export default function MovieCard({ id, title, poster_path, backdrop_path, isFavorite }) {
 
+    //parte de favoritos
     const handleFavorite = (movie) => {
         let favoritos = JSON.parse(localStorage.getItem('favoritos')) || []
 
@@ -17,6 +18,7 @@ export default function MovieCard({ id, title, poster_path, backdrop_path, isFav
 
         localStorage.setItem('favoritos', JSON.stringify(favoritos))
     }
+    //fim parte de favoritos
 
     return (
         <div key={id} className="flex flex-col text-center justify-center items-center flex-shrink-0 relative">
