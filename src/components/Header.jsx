@@ -34,7 +34,7 @@ export default function Header() {
                                 </button>
                                 {showSubmenu && (
                                     <ul className="absolute bg-purple-700 mt-2 p-2 rounded shadow-lg text-white">
-                                        <li><NavLink to="/saved/watch-later">Ver depois</NavLink></li>
+                                        <li><NavLink to="/saved">Ver depois</NavLink></li>
                                         <li><NavLink to="/saved/watched">Assistidos</NavLink></li>
                                     </ul>
                                 )}

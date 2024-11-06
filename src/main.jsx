@@ -11,6 +11,7 @@ import MovieListPage from './pages/MovieListPage.jsx'
 import MoviesByGenrePage from './pages/MoviesByGenrePage.jsx'
 import PageNotFound from './pages/PageNotFound.jsx'
 import Favoritos from './pages/Favoritos.jsx'
+import FilmesSalvos from './pages/FilmesSalvos.jsx'
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       { path: '/genre/:generoescolhido', element: <MoviesByGenrePage /> },
       { path: '/contato', element: <Contato /> },
       { path: '/favoritos', element: <Favoritos /> },
+      { path: '/saved', element: <FilmesSalvos /> },
       { path: '*', element: <PageNotFound /> }
     ]
 
