@@ -21,7 +21,7 @@ export default function ContainerRecomendados({titulo}) {
 
                 const results = await Promise.all(promises); 
                 const todosRecomendados = results.flat(); 
-                setRecomendados(todosRecomendados);
+                setRecomendados(todosRecomendados.reverse());
             } catch (error) {
                 console.error("Erro ao buscar recomendações:", error);
             }
