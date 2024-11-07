@@ -13,6 +13,10 @@ export default function Home() {
     const chave_api = '?api_key=7c572a9f5b3ba776080330d23bb76e1e';
     const inicio_url = 'https://api.themoviedb.org/3';
 
+    
+
+    
+
     const fetchMovies = async () => {
         try {
             const popularidadeURL = `${inicio_url}/movie/popular?api_key=${import.meta.env.VITE_API_KEY}&language=pt-br&page=1`;
@@ -44,18 +48,7 @@ export default function Home() {
     }, []);
 
 
-    useEffect(() => {
-        const filmesFavoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
-        let lista = []
 
-
-        for (let i = 0; i < filmesFavoritos.length; i++) {
-            lista = lista.concat(filmesFavoritos[i].genre_ids);
-            
-        }
-
-        
-    }, []);
 
     return (
         <>

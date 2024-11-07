@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function RecomendadoCard({ filmesFiltrados }) {
+export default function RecomendadoCard({ recomendados }) {
 
     const [selected, setSelected] = useState(1);
 
@@ -48,7 +48,7 @@ peer-checked/05:-translate-x-40
 ">
                         <label className="absolute inset-0" htmlFor="article-01"></label>
                         <div className=" rounded-lg shadow-2xl" style={{ display: 'inline-block' }}>
-                            <img src={`https://image.tmdb.org/t/p/w780/${filmesFiltrados[0].poster_path}`} className="h-[77vh] rounded-lg m-0" />
+                            <img src={`https://image.tmdb.org/t/p/w780/${recomendados[0].poster_path}`} className="h-[77vh] rounded-lg m-0" />
                         </div>
                     </div>
 
@@ -74,7 +74,7 @@ peer-checked/05:opacity-0
 ">
                         <label className="absolute inset-0" htmlFor="article-02"><span className="sr-only">Focus on the big picture</span></label>
                         <div className=" rounded-lg shadow-2xl" style={{ display: 'inline-block' }}>
-                            <img src={`https://image.tmdb.org/t/p/w780/${filmesFiltrados[1].poster_path}`} className="h-[77vh] rounded-lg m-0" />
+                            <img src={`https://image.tmdb.org/t/p/w780/${recomendados[1].poster_path}`} className="h-[77vh] rounded-lg m-0" />
                         </div>
                     </div>
 
@@ -100,7 +100,7 @@ peer-checked/05:z-30
 ">
                         <label className="absolute inset-0" htmlFor="article-03"><span className="sr-only">Focus on the big picture</span></label>
                         <div className=" rounded-lg shadow-2xl" style={{ display: 'inline-block' }}>
-                            <img src={`https://image.tmdb.org/t/p/w780/${filmesFiltrados[2].poster_path}`} className="h-[77vh] rounded-lg m-0" />
+                            <img src={`https://image.tmdb.org/t/p/w780/${recomendados[2].poster_path}`} className="h-[77vh] rounded-lg m-0" />
                         </div>
 
                     </div>
@@ -127,7 +127,7 @@ peer-checked/05:z-40
 ">
                         <label className="absolute inset-0" htmlFor="article-04"><span className="sr-only">Focus on the big picture</span></label>
                         <div className=" rounded-lg shadow-2xl" style={{ display: 'inline-block' }}>
-                            <img src={`https://image.tmdb.org/t/p/w780/${filmesFiltrados[4].poster_path}`} className="h-[77vh] rounded-lg m-0" />
+                            <img src={`https://image.tmdb.org/t/p/w780/${recomendados[3].poster_path}`} className="h-[77vh] rounded-lg m-0" />
                         </div>
                     </div>
                 </div>

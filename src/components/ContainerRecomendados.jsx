@@ -3,37 +3,31 @@ import { useEffect, useState } from 'react';
 import RecomendadoCard from './RecomendadoCard';
 
 export default function ContainerRecomendados({titulo}) {
-    const [selected, setSelected] = useState(1);
-    const [filmes, setFilmes] = useState([]);
-
+    const [recomendados, setRecomendados] = useState([]);
 
     useEffect(() => {
-        const radioButtons = ["article-01", "article-02", "article-03", "article-04"];
+        const filmesFavoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+        const listaIds = filmesFavoritos.map(filme => filme.id); 
 
-        const interval = setInterval(() => {
-            // Alterna entre os botões de rádio
-            setSelected((prevSelected) => {
-                const next = (prevSelected % radioButtons.length) + 1;
-                return next;
-            });
-        }, 3000); // Muda a cada 3 segundos
+        getMovieRecommendations(listaIds);
 
-        return () => clearInterval(interval); // Limpa o intervalo quando o componente é desmontado
+        async function getMovieRecommendations(ids) {
+            try {
+                const promises = ids.map(id =>
+                    fetch(`https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=7c572a9f5b3ba776080330d23bb76e1e`)
+                        .then(response => response.json())
+                        .then(data => data.results)
+                );
+
+                const results = await Promise.all(promises); 
+                const todosRecomendados = results.flat(); 
+                setRecomendados(todosRecomendados);
+            } catch (error) {
+                console.error("Erro ao buscar recomendações:", error);
+            }
+        }
+
     }, []);
-
-
-    useEffect(() => {
-            fetch(`https://api.themoviedb.org/3/movie/popular?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-br`)
-            .then(response => response.json())
-            .then(data => {
-                setFilmes(data.results)
-            })
-            .catch(error => console.error(error));
-        },
-     []);
-        
-    const filmesFiltrados = filmes.filter(filme => filme.vote_average > 7)
-    console.log(filmesFiltrados)
 
 
     return (
@@ -41,10 +35,10 @@ export default function ContainerRecomendados({titulo}) {
             <section className="px-12">
                 <h2 className="text-3xl font-bold mb-5">{titulo}</h2>
             {
-                filmesFiltrados.length >= 4 ?
+                recomendados.length >= 4 ?
 
                 
-                <RecomendadoCard filmesFiltrados={filmesFiltrados} />
+                <RecomendadoCard recomendados={recomendados} />
 
                 :
                 <p> Filme não encontrado</p>
