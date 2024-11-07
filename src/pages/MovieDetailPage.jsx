@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ContainerCards from "../components/ContainerCards";
 import ElencoCard from "../components/ElencoCard";
-import ImgSalvar from "../../public/salvar.png";
-import ImgeRemoverSalvar from "../../public/removerSalvar.png";
-import ImgAssistido from "../../public/assistido.png";
-import ImgNaoAssistido from "../../public/naoAssistido.png";
+import ImgSalvar from "/salvar.png";
+import ImgeRemoverSalvar from "/removerSalvar.png";
+import ImgAssistido from "/assistido.png";
+import ImgNaoAssistido from "/naoAssistido.png";
 
 export default function MovieDetailPage() {
     const { id } = useParams();

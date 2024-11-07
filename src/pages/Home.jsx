@@ -4,7 +4,7 @@ import ContainerRecomendados from "../components/ContainerRecomendados";
 import MovieCard from "../components/MovieCard";
 
 export default function Home() {
-    
+
     const [filmesPopulares, setFilmesPopulares] = useState([]);
     const [filmesEstaoPorVir, setFilmesEstaoPorVir] = useState([]);
     const [filmesTendencia, setFilmesTendencia] = useState([]);
@@ -43,55 +43,60 @@ export default function Home() {
         fetchMovies();
     }, []);
 
+
+    useEffect(() => {
+        const filmesFavoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+        let lista = []
+
+
+        for (let i = 0; i < filmesFavoritos.length; i++) {
+            lista = lista.concat(filmesFavoritos[i].genre_ids);
+            
+        }
+
+        
+    }, []);
+
     return (
         <>
-        <div className="bg-gray-900 text-white min-h-screen px-4 py-6">
-            <ContainerRecomendados titulo="Recomendados">
+            <div className="bg-gray-900 text-white min-h-screen px-4 py-6">
+                <ContainerRecomendados titulo="Recomendados">
 
-            </ContainerRecomendados>
+                </ContainerRecomendados>
 
-            {/* <CardContainer titulo="Filmes antigos">
-                {
-                    movies
-                        .filter(filme => (filme.ano_lancamento < 2000))
-                        .map(filme => (
-                            <MovieCard key={filme.id} {...filme} />
-                        ))
-                }
-            </CardContainer> */}
 
-            <ContainerCards titulo="Filmes Populares">
-                {
-                    filmesPopulares
-                        .map(movie => (
-                            <MovieCard
-                                key={movie.id} {...movie} isFavorite={true}/>
-                        )
-                        )
-                }
-            </ContainerCards>
+                <ContainerCards titulo="Filmes Populares">
+                    {
+                        filmesPopulares
+                            .map(movie => (
+                                <MovieCard
+                                    key={movie.id} {...movie} isFavorite={true} />
+                            )
+                            )
+                    }
+                </ContainerCards>
 
-            <ContainerCards titulo="Chegando Nos Cinemas">
-                {
-                    filmesEstaoPorVir
-                        .map(movie => (
-                            <MovieCard
-                                key={movie.id} {...movie} />
-                        )
-                        )
-                }
-            </ContainerCards>
+                <ContainerCards titulo="Chegando Nos Cinemas">
+                    {
+                        filmesEstaoPorVir
+                            .map(movie => (
+                                <MovieCard
+                                    key={movie.id} {...movie} />
+                            )
+                            )
+                    }
+                </ContainerCards>
 
-            <ContainerCards titulo="Tendências">
-                {
-                    filmesTendencia
-                        .map(movie => (
-                            <MovieCard
-                                key={movie.id} {...movie} />
-                        )
-                        )
-                }
-            </ContainerCards>
+                <ContainerCards titulo="Tendências">
+                    {
+                        filmesTendencia
+                            .map(movie => (
+                                <MovieCard
+                                    key={movie.id} {...movie} />
+                            )
+                            )
+                    }
+                </ContainerCards>
             </div>
 
         </>

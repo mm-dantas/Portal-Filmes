@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       { path: '/genre/:generoescolhido', element: <MoviesByGenrePage /> },
       { path: '/contato', element: <Contato /> },
       { path: '/favoritos', element: <Favoritos /> },
-      { path: '/saved', element: <FilmesSalvos /> },
+      { path: '/saved/:listaescolhida', element: <FilmesSalvos /> },
       { path: '*', element: <PageNotFound /> }
     ]
 

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 
 
-export default function MovieCard({ id, title, poster_path, backdrop_path, isFavorite }) {
+export default function MovieCard({ id, title, poster_path, genre_ids, backdrop_path, isFavorite }) {
 
     //parte de favoritos
     const handleFavorite = (movie) => {
@@ -26,7 +26,7 @@ export default function MovieCard({ id, title, poster_path, backdrop_path, isFav
             <img src={`https://image.tmdb.org/t/p/w342${poster_path}`} alt={title} className="rounded-t-lg w-[130px] h-[200px]" />
             <div className="p-2 rounded-b-lg bg-gray-500 w-full grid grid-cols-2 gap-4 items-center justify-items-center">                
                     <button className="transition ease-in-out duration-300 transform hover:scale-125"
-                        onClick={() => handleFavorite({ id, title, poster_path })}>
+                        onClick={() => handleFavorite({ id, title, poster_path, genre_ids })}>
                         {isFavorite ?
                             <MdFavorite className="text-red-500 transition-transform duration-300 ease-in-out transform scale-125" /> :
                             <MdFavoriteBorder className="text-light transition-transform duration-300 ease-in-out transform scale-125" />}
