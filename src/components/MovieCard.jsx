@@ -5,6 +5,13 @@ import { useState, useEffect } from "react";
 
 export default function MovieCard({ id, title, poster_path, genre_ids, backdrop_path, isFavorite }) {
     const [isFavorito, setFavorito] = useState(false);
+
+    // Carregar o estado de favorito ao montar o componente
+    useEffect(() => {
+        const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+        const isFavorito = favoritos.some(filme => filme.id === id);
+        setFavorito(isFavorito);  // Atualiza o estado com base no localStorage
+    }, [id]);
     
     //parte de favoritos
     const handleFavorite = (movie) => {
@@ -19,7 +26,7 @@ export default function MovieCard({ id, title, poster_path, genre_ids, backdrop_
         }
 
         localStorage.setItem('favoritos', JSON.stringify(favoritos))
-        setFavorito(isFavorito)
+        setFavorito(!isFavorito)
     }
     //fim parte de favoritos
 
