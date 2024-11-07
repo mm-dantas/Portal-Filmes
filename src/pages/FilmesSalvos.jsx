@@ -24,7 +24,7 @@ export default function FilmesSalvos() {
                     {savedMovies
                         .map(movie => (
                             <MovieCard
-                                key={movie.id} {...movie} isFavorite={true}/>
+                                key={movie.id} {...movie}/>
                         )
                         )
                     }

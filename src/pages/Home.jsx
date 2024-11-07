@@ -13,9 +13,9 @@ export default function Home() {
     const chave_api = '?api_key=7c572a9f5b3ba776080330d23bb76e1e';
     const inicio_url = 'https://api.themoviedb.org/3';
 
-    
 
-    
+
+
 
     const fetchMovies = async () => {
         try {
@@ -53,7 +53,7 @@ export default function Home() {
     return (
         <>
             <div className="bg-gray-900 text-white min-h-screen px-4 py-6">
-                <ContainerRecomendados titulo="Recomendados">
+                <ContainerRecomendados titulo="Recomendados Para Você">
 
                 </ContainerRecomendados>
 
@@ -63,7 +63,7 @@ export default function Home() {
                         filmesPopulares
                             .map(movie => (
                                 <MovieCard
-                                    key={movie.id} {...movie} isFavorite={true} />
+                                    key={movie.id} {...movie} />
                             )
                             )
                     }
