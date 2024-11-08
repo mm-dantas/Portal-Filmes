@@ -106,7 +106,7 @@ export default function MovieDetailPage() {
                 <div className="absolute inset-0 bg-black opacity-50"></div>
                 <div className="flex gap-7 w-[100vw] px-20">
                     <img src={`https://image.tmdb.org/t/p/w780${filme.poster_path}`} alt={filme.title} className="rounded-lg relative z-10 h-[500px]" />
-                    <div className="relative z-10 p-4 flex flex-col justify-between h-[500px]">
+                    <div className="relative z-10 p-4 flex flex-col justify-between h-[500px] ">
                         <div>
                             <div className="flex items-center gap-3">
                                 <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-800 drop-shadow-lg mb-4">
