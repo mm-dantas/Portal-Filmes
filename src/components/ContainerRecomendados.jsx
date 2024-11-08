@@ -14,7 +14,7 @@ export default function ContainerRecomendados({titulo}) {
         async function getMovieRecommendations(ids) {
             try {
                 const promises = ids.map(id =>
-                    fetch(`https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=7c572a9f5b3ba776080330d23bb76e1e`)
+                    fetch(`https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${import.meta.env.VITE_API_KEY}`)
                         .then(response => response.json())
                         .then(data => data.results)
                 );

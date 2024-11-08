@@ -9,14 +9,13 @@ export default function RecomendadoCard({ recomendados }) {
         const radioButtons = ["article-01", "article-02", "article-03", "article-04"];
 
         const interval = setInterval(() => {
-            // Alterna entre os botões de rádio
             setSelected((prevSelected) => {
                 const next = (prevSelected % radioButtons.length) + 1;
                 return next;
             });
-        }, 3000); // Muda a cada 3 segundos
+        }, 3000); 
 
-        return () => clearInterval(interval); // Limpa o intervalo quando o componente é desmontado
+        return () => clearInterval(interval); 
     }, []);
 
         return (

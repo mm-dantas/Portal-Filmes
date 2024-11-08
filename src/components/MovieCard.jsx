@@ -10,7 +10,7 @@ export default function MovieCard({ id, title, poster_path, genre_ids, backdrop_
     useEffect(() => {
         const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
         const isFavorito = favoritos.some(filme => filme.id === id);
-        setFavorito(isFavorito);  // Atualiza o estado com base no localStorage
+        setFavorito(isFavorito); 
     }, [id]);
     
     //parte de favoritos

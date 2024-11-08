@@ -43,7 +43,7 @@ useEffect(() => {
 
 
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-br`)
+        fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_API_KEY}&language=pt-br`)
             .then(response => response.json())
             .then(data => {
                 setFilme(data);
@@ -53,7 +53,7 @@ useEffect(() => {
     }, [id]);
 
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR`)
+        fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${import.meta.env.VITE_API_KEY}&language=pt-BR`)
             .then(response => response.json())
             .then(data => {
                 if (data.results.length > 0) {
